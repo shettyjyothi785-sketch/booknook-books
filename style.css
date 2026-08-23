@@ -889,3 +889,39 @@ footer {
     }
 
 }
+/* ===============================
+   MOBILE PRODUCT CARD FIX
+   =============================== */
+
+@media (max-width: 768px) {
+
+    .product-card {
+        height: auto;
+        overflow: visible;
+    }
+
+    .product-info {
+        padding: 15px;
+    }
+
+    .product-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .product-actions button {
+        display: block;
+        width: 100%;
+        min-height: 44px;
+        padding: 10px;
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .add-btn,
+    .view-btn {
+        width: 100%;
+    }
+}
