@@ -646,3 +646,62 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 });
+
+// ===============================
+// LOGIN / REGISTER
+// ===============================
+
+function loginUser() {
+
+    const username = document.getElementById("username");
+    const email = document.getElementById("email");
+    const message = document.getElementById("loginMessage");
+
+    if (!username || !email || !message) {
+        return;
+    }
+
+    const name = username.value.trim();
+    const userEmail = email.value.trim();
+
+    if (name === "" || userEmail === "") {
+        message.textContent = "Please enter your name and email.";
+        message.style.color = "red";
+        return;
+    }
+
+    localStorage.setItem(
+        "bookNookUser",
+        JSON.stringify({
+            name: name,
+            email: userEmail
+        })
+    );
+
+    message.textContent =
+        "Welcome to BookNook, " + name + "! 📚";
+
+    message.style.color = "#2D6A4F";
+}
+
+
+// ===============================
+// CONTACT FORM
+// ===============================
+
+const contactForm = document.getElementById("contactForm");
+
+if (contactForm) {
+
+    contactForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        alert(
+            "Thank you for contacting BookNook! 📚\nYour message has been sent successfully."
+        );
+
+        contactForm.reset();
+
+    });
+}
