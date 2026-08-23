@@ -1,7 +1,8 @@
-/* ================= BOOK DATA ================= */
+// ===============================
+// BOOKNOOK - BOOK DATA
+// ===============================
 
 const books = [
-
     {
         id: 1,
         title: "The Great Gatsby",
@@ -9,12 +10,10 @@ const books = [
         category: "Fiction",
         price: 299,
         rating: 4.7,
-        isbn: "978-0-7432-7356-5",
-        icon: "📕",
-        description:
-            "A timeless story of wealth, love, dreams and the mysterious Jay Gatsby."
+        isbn: "9780743273565",
+        image: "https://covers.openlibrary.org/b/isbn/9780743273565-M.jpg",
+        description: "A timeless story of wealth, love, dreams and the mysterious Jay Gatsby."
     },
-
     {
         id: 2,
         title: "The Alchemist",
@@ -22,12 +21,10 @@ const books = [
         category: "Fiction",
         price: 249,
         rating: 4.8,
-        isbn: "978-0-06-112241-5",
-        icon: "📗",
-        description:
-            "An inspiring journey about following your dreams and discovering your destiny."
+        isbn: "9780061122415",
+        image: "https://covers.openlibrary.org/b/isbn/9780061122415-M.jpg",
+        description: "An inspiring journey about following your dreams and discovering your destiny."
     },
-
     {
         id: 3,
         title: "Sapiens",
@@ -35,12 +32,10 @@ const books = [
         category: "Non-Fiction",
         price: 499,
         rating: 4.8,
-        isbn: "978-0-06-231609-7",
-        icon: "📘",
-        description:
-            "A fascinating exploration of the history and development of humankind."
+        isbn: "9780062316097",
+        image: "https://covers.openlibrary.org/b/isbn/9780062316097-M.jpg",
+        description: "A fascinating exploration of the history and development of humankind."
     },
-
     {
         id: 4,
         title: "Atomic Habits",
@@ -48,12 +43,10 @@ const books = [
         category: "Non-Fiction",
         price: 399,
         rating: 4.9,
-        isbn: "978-0-7352-1129-2",
-        icon: "📙",
-        description:
-            "A practical guide to building good habits and breaking bad ones."
+        isbn: "9780735211292",
+        image: "https://covers.openlibrary.org/b/isbn/9780735211292-M.jpg",
+        description: "A practical guide to building good habits and breaking bad ones."
     },
-
     {
         id: 5,
         title: "The Little Prince",
@@ -61,12 +54,10 @@ const books = [
         category: "Children",
         price: 199,
         rating: 4.9,
-        isbn: "978-0-15-601219-5",
-        icon: "🌟",
-        description:
-            "A beautiful children's classic filled with imagination and life lessons."
+        isbn: "9780156012195",
+        image: "https://covers.openlibrary.org/b/isbn/9780156012195-M.jpg",
+        description: "A beautiful children's classic filled with imagination and life lessons."
     },
-
     {
         id: 6,
         title: "Charlotte's Web",
@@ -74,12 +65,10 @@ const books = [
         category: "Children",
         price: 229,
         rating: 4.7,
-        isbn: "978-0-06-440055-8",
-        icon: "🕷️",
-        description:
-            "A heartwarming story about friendship between a pig and a spider."
+        isbn: "9780064400558",
+        image: "https://covers.openlibrary.org/b/isbn/9780064400558-M.jpg",
+        description: "A heartwarming story about friendship between a pig and a spider."
     },
-
     {
         id: 7,
         title: "Classic Notebook",
@@ -88,11 +77,9 @@ const books = [
         price: 149,
         rating: 4.6,
         isbn: "BN-NOTE-001",
-        icon: "📓",
-        description:
-            "A premium notebook perfect for notes, ideas, journaling and planning."
+        image: "https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=500",
+        description: "A premium notebook perfect for notes, ideas, journaling and planning."
     },
-
     {
         id: 8,
         title: "Creative Pen Set",
@@ -101,45 +88,52 @@ const books = [
         price: 179,
         rating: 4.5,
         isbn: "BN-PEN-002",
-        icon: "🖊️",
-        description:
-            "A colorful set of smooth-writing pens for school, college and creative work."
+        image: "https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=500",
+        description: "A colorful set of smooth-writing pens for school, college and creative work."
     }
-
 ];
 
 
-/* ================= CART ================= */
+// ===============================
+// CART
+// ===============================
 
 let cart = JSON.parse(localStorage.getItem("bookNookCart")) || [];
 
 
-/* ================= DOM ELEMENTS ================= */
+// ===============================
+// GET ELEMENT HELPER
+// ===============================
 
-const productGrid = document.getElementById("productGrid");
-const searchInput = document.getElementById("searchInput");
-const categoryFilter = document.getElementById("categoryFilter");
-const priceFilter = document.getElementById("priceFilter");
+function getElement(id) {
+    return document.getElementById(id);
+}
 
 
-/* ================= DISPLAY PRODUCTS ================= */
+// ===============================
+// DISPLAY PRODUCTS
+// ===============================
 
 function displayProducts(list = books) {
+
+    const productGrid = getElement("productGrid");
+
+    if (!productGrid) {
+        console.error("productGrid not found in HTML");
+        return;
+    }
 
     productGrid.innerHTML = "";
 
     if (list.length === 0) {
-
         productGrid.innerHTML = `
             <div class="no-products">
                 <h3>📚 No books found</h3>
                 <p>Try another search or category.</p>
             </div>
         `;
-
         return;
     }
-
 
     list.forEach(book => {
 
@@ -148,9 +142,12 @@ function displayProducts(list = books) {
         card.className = "product-card";
 
         card.innerHTML = `
-
             <div class="product-image">
-                ${book.icon}
+                <img 
+                    src="${book.image}"
+                    alt="${book.title}"
+                    onerror="this.src='https://placehold.co/300x400/FDF6E3/2D6A4F?text=BookNook';"
+                >
             </div>
 
             <div class="product-info">
@@ -193,25 +190,31 @@ function displayProducts(list = books) {
         `;
 
         productGrid.appendChild(card);
-
     });
-
 }
 
 
-/* ================= SEARCH + FILTER ================= */
+// ===============================
+// SEARCH AND FILTER
+// ===============================
 
 function filterProducts() {
 
-    const search =
-        searchInput.value.toLowerCase();
+    const searchInput = getElement("searchInput");
+    const categoryFilter = getElement("categoryFilter");
+    const priceFilter = getElement("priceFilter");
 
-    const category =
-        categoryFilter.value;
+    const search = searchInput
+        ? searchInput.value.toLowerCase()
+        : "";
 
-    const price =
-        priceFilter.value;
+    const category = categoryFilter
+        ? categoryFilter.value
+        : "All";
 
+    const price = priceFilter
+        ? priceFilter.value
+        : "All";
 
     const filtered = books.filter(book => {
 
@@ -224,86 +227,73 @@ function filterProducts() {
             book.category === category;
 
         const matchesPrice =
-    price === "All" ||
-    book.price <= Number(price);
+            price === "All" ||
+            book.price <= Number(price);
 
         return matchesSearch &&
                matchesCategory &&
                matchesPrice;
-
     });
-
 
     displayProducts(filtered);
 }
 
 
-searchInput.addEventListener(
-    "input",
-    filterProducts
-);
-
-categoryFilter.addEventListener(
-    "change",
-    filterProducts
-);
-
-priceFilter.addEventListener(
-    "change",
-    filterProducts
-);
-
-
-/* ================= CATEGORY BUTTON ================= */
+// ===============================
+// CATEGORY FILTER
+// ===============================
 
 function filterCategory(category) {
 
-    categoryFilter.value = category;
+    const categoryFilter = getElement("categoryFilter");
 
-    document
-        .getElementById("products")
-        .scrollIntoView({
+    if (categoryFilter) {
+        categoryFilter.value = category;
+    }
+
+    const products = getElement("products");
+
+    if (products) {
+        products.scrollIntoView({
             behavior: "smooth"
         });
+    }
 
     filterProducts();
 }
 
 
-/* ================= ADD TO CART ================= */
+// ===============================
+// ADD TO CART
+// ===============================
 
 function addToCart(id) {
 
-    const book =
-        books.find(item => item.id === id);
+    const book = books.find(book => book.id === id);
 
-    const existing =
-        cart.find(item => item.id === id);
+    if (!book) return;
 
+    const existing = cart.find(item => item.id === id);
 
     if (existing) {
-
         existing.quantity++;
-
     } else {
-
         cart.push({
             ...book,
             quantity: 1
         });
-
     }
 
-
     saveCart();
-
     updateCartCount();
 
-    alert(`${book.title} added to your cart! 🛒`);
+    alert(book.title + " added to your cart! 🛒");
 }
 
 
-/* ================= SAVE CART ================= */
+// ===============================
+// SAVE CART
+// ===============================
 
 function saveCart() {
 
@@ -311,61 +301,69 @@ function saveCart() {
         "bookNookCart",
         JSON.stringify(cart)
     );
-
 }
 
 
-/* ================= CART COUNT ================= */
+// ===============================
+// CART COUNT
+// ===============================
 
 function updateCartCount() {
 
-    const count =
-        cart.reduce(
-            (total, item) =>
-                total + item.quantity,
-            0
-        );
+    const cartCount = getElement("cartCount");
 
-    document.getElementById(
-        "cartCount"
-    ).textContent = count;
+    if (!cartCount) return;
 
+    const count = cart.reduce(
+        (total, item) => total + item.quantity,
+        0
+    );
+
+    cartCount.textContent = count;
 }
 
 
-/* ================= OPEN CART ================= */
+// ===============================
+// OPEN CART
+// ===============================
 
 function openCart() {
 
     renderCart();
 
-    document
-        .getElementById("cartModal")
-        .classList.add("active");
+    const modal = getElement("cartModal");
 
+    if (modal) {
+        modal.classList.add("active");
+    }
 }
 
 
-/* ================= CLOSE CART ================= */
+// ===============================
+// CLOSE CART
+// ===============================
 
 function closeCart() {
 
-    document
-        .getElementById("cartModal")
-        .classList.remove("active");
+    const modal = getElement("cartModal");
 
+    if (modal) {
+        modal.classList.remove("active");
+    }
 }
 
 
-/* ================= RENDER CART ================= */
+// ===============================
+// RENDER CART
+// ===============================
 
 function renderCart() {
 
-    const cartItems =
-        document.getElementById("cartItems");
+    const cartItems = getElement("cartItems");
+
+    if (!cartItems) return;
 
     cartItems.innerHTML = "";
-
 
     if (cart.length === 0) {
 
@@ -376,39 +374,31 @@ function renderCart() {
             </div>
         `;
 
+        updateCartTotal();
+        return;
     }
-
 
     cart.forEach(item => {
 
-        const cartItem =
-            document.createElement("div");
+        const cartItem = document.createElement("div");
 
         cartItem.className = "cart-item";
 
         cartItem.innerHTML = `
-
             <div>
-
-                <h4>${item.icon} ${item.title}</h4>
-
-                <p>
-                    ₹${item.price.toFixed(2)}
-                </p>
-
+                <h4>${item.title}</h4>
+                <p>₹${item.price.toFixed(2)}</p>
             </div>
 
             <div class="quantity-controls">
 
-                <button
-                    onclick="changeQuantity(${item.id}, -1)">
+                <button onclick="changeQuantity(${item.id}, -1)">
                     −
                 </button>
 
                 <strong>${item.quantity}</strong>
 
-                <button
-                    onclick="changeQuantity(${item.id}, 1)">
+                <button onclick="changeQuantity(${item.id}, 1)">
                     +
                 </button>
 
@@ -419,66 +409,54 @@ function renderCart() {
                 onclick="removeFromCart(${item.id})">
                 Remove
             </button>
-
         `;
 
         cartItems.appendChild(cartItem);
-
     });
 
-
     updateCartTotal();
-
 }
 
 
-/* ================= QUANTITY ================= */
+// ===============================
+// CHANGE QUANTITY
+// ===============================
 
 function changeQuantity(id, amount) {
 
-    const item =
-        cart.find(book => book.id === id);
+    const item = cart.find(item => item.id === id);
 
     if (!item) return;
 
-
     item.quantity += amount;
 
-
     if (item.quantity <= 0) {
-
-        cart =
-            cart.filter(book => book.id !== id);
-
+        cart = cart.filter(item => item.id !== id);
     }
 
-
     saveCart();
-
     updateCartCount();
-
     renderCart();
-
 }
 
 
-/* ================= REMOVE ================= */
+// ===============================
+// REMOVE FROM CART
+// ===============================
 
 function removeFromCart(id) {
 
-    cart =
-        cart.filter(item => item.id !== id);
+    cart = cart.filter(item => item.id !== id);
 
     saveCart();
-
     updateCartCount();
-
     renderCart();
-
 }
 
 
-/* ================= TOTAL ================= */
+// ===============================
+// CART TOTAL
+// ===============================
 
 function getCartTotal() {
 
@@ -487,37 +465,45 @@ function getCartTotal() {
             total + item.price * item.quantity,
         0
     );
-
 }
 
 
 function updateCartTotal() {
 
-    document.getElementById(
-        "cartTotal"
-    ).textContent =
-        `₹${getCartTotal().toFixed(2)}`;
+    const cartTotal = getElement("cartTotal");
 
+    if (!cartTotal) return;
+
+    cartTotal.textContent =
+        "₹" + getCartTotal().toFixed(2);
 }
 
 
-/* ================= PRODUCT DETAILS ================= */
+// ===============================
+// PRODUCT DETAILS
+// ===============================
 
 function showProduct(id) {
 
-    const book =
-        books.find(item => item.id === id);
+    const book = books.find(book => book.id === id);
 
-    const details =
-        document.getElementById("productDetails");
+    if (!book) return;
 
+    const details = getElement("productDetails");
+
+    if (!details) return;
 
     details.innerHTML = `
-
         <div class="detail-content">
 
             <div class="detail-image">
-                ${book.icon}
+
+                <img
+                    src="${book.image}"
+                    alt="${book.title}"
+                    onerror="this.src='https://placehold.co/300x400/FDF6E3/2D6A4F?text=BookNook';"
+                >
+
             </div>
 
             <div>
@@ -561,26 +547,31 @@ function showProduct(id) {
         </div>
     `;
 
+    const modal = getElement("productModal");
 
-    document
-        .getElementById("productModal")
-        .classList.add("active");
-
+    if (modal) {
+        modal.classList.add("active");
+    }
 }
 
 
-/* ================= CLOSE PRODUCT ================= */
+// ===============================
+// CLOSE PRODUCT
+// ===============================
 
 function closeProduct() {
 
-    document
-        .getElementById("productModal")
-        .classList.remove("active");
+    const modal = getElement("productModal");
 
+    if (modal) {
+        modal.classList.remove("active");
+    }
 }
 
 
-/* ================= CHECKOUT ================= */
+// ===============================
+// CHECKOUT
+// ===============================
 
 function openCheckout() {
 
@@ -593,171 +584,65 @@ function openCheckout() {
         return;
     }
 
+    const checkoutTotal = getElement("checkoutTotal");
 
-    document.getElementById(
-        "checkoutTotal"
-    ).textContent =
-        `₹${getCartTotal().toFixed(2)}`;
-
+    if (checkoutTotal) {
+        checkoutTotal.textContent =
+            "₹" + getCartTotal().toFixed(2);
+    }
 
     closeCart();
 
+    const modal = getElement("checkoutModal");
 
-    document
-        .getElementById("checkoutModal")
-        .classList.add("active");
-
+    if (modal) {
+        modal.classList.add("active");
+    }
 }
 
 
 function closeCheckout() {
 
-    document
-        .getElementById("checkoutModal")
-        .classList.remove("active");
+    const modal = getElement("checkoutModal");
 
+    if (modal) {
+        modal.classList.remove("active");
+    }
 }
 
 
-/* ================= CHECKOUT FORM ================= */
+// ===============================
+// INITIALIZE
+// ===============================
 
-document
-    .getElementById("checkoutForm")
-    .addEventListener("submit", function(event) {
+document.addEventListener("DOMContentLoaded", function () {
 
-        event.preventDefault();
+    displayProducts();
 
-        const orderNumber =
-            "BN" +
-            Math.floor(
-                100000 +
-                Math.random() * 900000
-            );
+    updateCartCount();
 
+    const searchInput = getElement("searchInput");
+    const categoryFilter = getElement("categoryFilter");
+    const priceFilter = getElement("priceFilter");
 
-        alert(
-            `🎉 Order placed successfully!\n\nOrder ID: ${orderNumber}\nTotal: ₹${getCartTotal().toFixed(2)}`
+    if (searchInput) {
+        searchInput.addEventListener(
+            "input",
+            filterProducts
         );
+    }
 
-
-        cart = [];
-
-        saveCart();
-
-        updateCartCount();
-
-        this.reset();
-
-        closeCheckout();
-
-    });
-
-
-/* ================= LOGIN ================= */
-
-function loginUser() {
-
-    const name =
-        document.getElementById(
-            "username"
-        ).value.trim();
-
-    const email =
-        document.getElementById(
-            "email"
-        ).value.trim();
-
-    const message =
-        document.getElementById(
-            "loginMessage"
+    if (categoryFilter) {
+        categoryFilter.addEventListener(
+            "change",
+            filterProducts
         );
-
-
-    if (!name || !email) {
-
-        message.textContent =
-            "Please enter your name and email.";
-
-        return;
     }
 
-
-    localStorage.setItem(
-        "bookNookUser",
-        JSON.stringify({
-            name,
-            email
-        })
-    );
-
-
-    message.textContent =
-        `Welcome to BookNook, ${name}! 📚`;
-
-}
-
-
-/* ================= CONTACT FORM ================= */
-
-document
-    .getElementById("contactForm")
-    .addEventListener("submit", function(event) {
-
-        event.preventDefault();
-
-        alert(
-            "Thank you! Your message has been sent successfully. 📚"
+    if (priceFilter) {
+        priceFilter.addEventListener(
+            "change",
+            filterProducts
         );
-
-        this.reset();
-
-    });
-
-
-/* ================= MOBILE MENU ================= */
-
-document
-    .getElementById("menuBtn")
-    .addEventListener("click", function() {
-
-        document
-            .getElementById("navMenu")
-            .classList.toggle("show");
-
-    });
-
-
-/* ================= MODAL CLICK OUTSIDE ================= */
-
-window.addEventListener("click", function(event) {
-
-    const cartModal =
-        document.getElementById("cartModal");
-
-    const productModal =
-        document.getElementById("productModal");
-
-    const checkoutModal =
-        document.getElementById("checkoutModal");
-
-
-    if (event.target === cartModal) {
-        closeCart();
     }
-
-    if (event.target === productModal) {
-        closeProduct();
-    }
-
-    if (event.target === checkoutModal) {
-        closeCheckout();
-    }
-
 });
-
-
-/* ================= INITIAL LOAD ================= */
-
-displayProducts();
-
-updateCartCount();
