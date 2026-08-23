@@ -705,3 +705,43 @@ if (contactForm) {
 
     });
 }
+// ===============================
+// PLACE ORDER
+// ===============================
+
+const checkoutForm = document.getElementById("checkoutForm");
+
+if (checkoutForm) {
+
+    checkoutForm.addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+        if (cart.length === 0) {
+            alert("Your cart is empty. Please add a book first.");
+            return;
+        }
+
+        const orderNumber =
+            "BN" + Math.floor(100000 + Math.random() * 900000);
+
+        const total = getCartTotal();
+
+        alert(
+            "🎉 Order placed successfully!\n\n" +
+            "Order ID: " + orderNumber + "\n" +
+            "Total: ₹" + total.toFixed(2) + "\n\n" +
+            "Thank you for shopping with BookNook! 📚"
+        );
+
+        cart = [];
+
+        saveCart();
+        updateCartCount();
+        updateCartTotal();
+
+        checkoutForm.reset();
+
+        closeCheckout();
+    });
+}
