@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BookNook - Books & Stationery</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header class="navbar">
+    <div class="nav-container">
+
+        <div class="logo">
+            📚 <span>BookNook</span>
+        </div>
+
+        <button class="menu-btn" id="menuBtn">☰</button>
+
+        <nav id="navMenu">
+            <a href="#home">Home</a>
+            <a href="#products">Books</a>
+            <a href="#categories">Categories</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <a href="#account">Account</a>
+
+            <button class="cart-btn" onclick="openCart()">
+                🛒 Cart
+                <span id="cartCount">0</span>
+            </button>
+        </nav>
+
+    </div>
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <p class="small-title">WELCOME TO BOOKNOOK</p>
+
+        <h1>
+            Stories that stay with you.
+        </h1>
+
+        <p>
+            Discover wonderful books, inspiring stories and
+            beautiful stationery for every reader.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#products" class="btn primary-btn">
+                Explore Books
+            </a>
+
+            <a href="#categories" class="btn secondary-btn">
+                Browse Categories
+            </a>
+        </div>
+
+    </div>
+
+    <div class="hero-books">
+        <div class="book-cover">📖</div>
+        <div class="book-cover second">📚</div>
+        <div class="book-cover third">✏️</div>
+    </div>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="section" id="categories">
+
+    <div class="section-heading">
+        <p>EXPLORE</p>
+        <h2>Shop by Category</h2>
+    </div>
+
+    <div class="category-grid">
+
+        <div class="category-card" onclick="filterCategory('Fiction')">
+            <div class="category-icon">📖</div>
+            <h3>Fiction</h3>
+            <p>Stories, mystery, romance & fantasy</p>
+        </div>
+
+        <div class="category-card" onclick="filterCategory('Non-Fiction')">
+            <div class="category-icon">📘</div>
+            <h3>Non-Fiction</h3>
+            <p>Knowledge, history & inspiration</p>
+        </div>
+
+        <div class="category-card" onclick="filterCategory('Children')">
+            <div class="category-icon">🧒</div>
+            <h3>Children's</h3>
+            <p>Fun and educational books</p>
+        </div>
+
+        <div class="category-card" onclick="filterCategory('Stationery')">
+            <div class="category-icon">✏️</div>
+            <h3>Stationery</h3>
+            <p>Notebooks, pens & art supplies</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<section class="section products-section" id="products">
+
+    <div class="section-heading">
+        <p>OUR COLLECTION</p>
+        <h2>Featured Books & Stationery</h2>
+    </div>
+
+
+    <div class="controls">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="🔍 Search books..."
+        >
+
+        <select id="categoryFilter">
+            <option value="All">All Categories</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Non-Fiction">Non-Fiction</option>
+            <option value="Children">Children's</option>
+            <option value="Stationery">Stationery</option>
+        </select>
+
+         <select id="priceFilter">
+    <option value="All">All Prices</option>
+    <option value="200">Under ₹200</option>
+    <option value="300">Under ₹300</option>
+    <option value="400">Under ₹400</option>
+    <option value="500">Under ₹500</option>
+        </select>
+
+    </div>
+
+
+    <div id="productGrid" class="product-grid"></div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about section" id="about">
+
+    <div class="about-content">
+
+        <div>
+            <p class="section-label">OUR STORY</p>
+
+            <h2>A cozy corner for every reader.</h2>
+
+            <p>
+                BookNook was created for people who believe that books
+                can inspire, educate and transform lives. We bring
+                together wonderful stories and quality stationery
+                in one welcoming place.
+            </p>
+
+            <p>
+                Whether you love mystery novels, children's stories,
+                biographies or beautiful notebooks, there is something
+                here for you.
+            </p>
+
+            <a href="#contact" class="btn primary-btn">
+                Get in Touch
+            </a>
+        </div>
+
+        <div class="about-box">
+            <span>📚</span>
+            <h3>Read. Learn. Imagine.</h3>
+            <p>
+                Your little online nook for books and creativity.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ACCOUNT ================= -->
+
+<section class="section account" id="account">
+
+    <div class="section-heading">
+        <p>WELCOME BACK</p>
+        <h2>Your Account</h2>
+    </div>
+
+    <div class="account-box">
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Enter your name"
+        >
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+        >
+
+        <button class="btn primary-btn" onclick="loginUser()">
+            Login / Register
+        </button>
+
+        <p id="loginMessage"></p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="section contact" id="contact">
+
+    <div class="section-heading">
+        <p>WE'D LOVE TO HEAR FROM YOU</p>
+        <h2>Contact Us</h2>
+    </div>
+
+    <div class="contact-container">
+
+        <div class="contact-info">
+
+            <h3>BookNook</h3>
+
+            <p>📍 Mangalore, Karnataka, India</p>
+
+            <p>📞 +91 98765 43210</p>
+
+            <p>✉️ hello@booknook.com</p>
+
+            <p>
+                Have a question about an order or book?
+                Send us a message.
+            </p>
+
+        </div>
+
+
+        <form id="contactForm">
+
+            <input
+                type="text"
+                placeholder="Your Name"
+                required
+            >
+
+            <input
+                type="email"
+                placeholder="Your Email"
+                required
+            >
+
+            <textarea
+                placeholder="Your Message"
+                rows="5"
+                required
+            ></textarea>
+
+            <button class="btn primary-btn" type="submit">
+                Send Message
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+            <h3>📚 BookNook</h3>
+            <p>
+                Stories, knowledge and creativity —
+                all in one place.
+            </p>
+        </div>
+
+        <div>
+            <h4>Quick Links</h4>
+            <a href="#home">Home</a>
+            <a href="#products">Books</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+
+        <div>
+            <h4>Categories</h4>
+            <a href="#products">Fiction</a>
+            <a href="#products">Non-Fiction</a>
+            <a href="#products">Children's</a>
+            <a href="#products">Stationery</a>
+        </div>
+
+    </div>
+
+    <div class="copyright">
+        © 2026 BookNook. All Rights Reserved.
+    </div>
+
+</footer>
+
+
+<!-- ================= CART MODAL ================= -->
+
+<div id="cartModal" class="modal">
+
+    <div class="cart-modal">
+
+        <button class="close-btn" onclick="closeCart()">
+            ×
+        </button>
+
+        <h2>🛒 Your Shopping Cart</h2>
+
+        <div id="cartItems"></div>
+
+        <div class="cart-total">
+            <strong>Total:</strong>
+            <span id="cartTotal">₹0.00</span>
+        </div>
+
+        <button class="btn primary-btn checkout-btn" onclick="openCheckout()">
+            Proceed to Checkout
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= PRODUCT MODAL ================= -->
+
+<div id="productModal" class="modal">
+
+    <div class="product-modal">
+
+        <button class="close-btn" onclick="closeProduct()">
+            ×
+        </button>
+
+        <div id="productDetails"></div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= CHECKOUT MODAL ================= -->
+
+<div id="checkoutModal" class="modal">
+
+    <div class="checkout-modal">
+
+        <button class="close-btn" onclick="closeCheckout()">
+            ×
+        </button>
+
+        <h2>Checkout</h2>
+
+        <form id="checkoutForm">
+
+            <input
+                type="text"
+                placeholder="Full Name"
+                required
+            >
+
+            <input
+                type="text"
+                placeholder="Phone Number"
+                required
+            >
+
+            <textarea
+                placeholder="Shipping Address"
+                rows="4"
+                required
+            ></textarea>
+
+            <select required>
+                <option value="">Select Payment Method</option>
+                <option>Cash on Delivery</option>
+                <option>UPI</option>
+                <option>Credit / Debit Card</option>
+            </select>
+
+            <div class="checkout-summary">
+                <strong>Order Total:</strong>
+                <span id="checkoutTotal">₹0.00</span>
+            </div>
+
+            <button class="btn primary-btn" type="submit">
+                Place Order
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
